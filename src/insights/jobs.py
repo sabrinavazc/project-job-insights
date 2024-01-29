@@ -16,12 +16,10 @@ class ProcessJobs:
         return self.jobs_list
 
     def get_unique_job_types(self) -> List[str]:
-        pass
+        unique_job_types = set(
+            job["job_type"] for job in self.jobs_list if job.get("job_type")
+        )
+        return sorted(list(unique_job_types))
 
     def filter_by_multiple_criteria(self) -> List[dict]:
         pass
-
-
-process_jobs = ProcessJobs()
-dados = process_jobs.read("data/jobs.csv")
-print(dados)

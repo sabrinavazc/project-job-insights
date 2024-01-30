@@ -43,4 +43,13 @@ class ProcessSalaries(ProcessJobs):
     def filter_by_salary_range(
         self, jobs: List[dict], salary: Union[str, int]
     ) -> List[Dict]:
-        pass
+        valid_jobs = []
+
+        for job in jobs:
+            try:
+                if self.matches_salary_range(job, salary):
+                    valid_jobs.append(job)
+            except ValueError as e:
+                print(f"Ignorando emprego inválido: {e}")
+
+        return valid_jobs

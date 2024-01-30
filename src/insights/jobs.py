@@ -21,5 +21,13 @@ class ProcessJobs:
         )
         return sorted(list(unique_job_types))
 
-    def filter_by_multiple_criteria(self) -> List[dict]:
-        pass
+    def filter_by_multiple_criteria(
+        self, jobs: List[Dict], filter_criteria: Dict
+    ) -> List[Dict]:
+        if not isinstance(filter_criteria, dict):
+            raise TypeError("O filtro fornecido deve ser um dicionário")
+
+        for key, value in filter_criteria.items():
+            jobs = [job for job in jobs if job.get(key) == value]
+
+        return jobs
